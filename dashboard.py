@@ -4,6 +4,7 @@ from scipy.io import arff
 import pickle
 import numpy as np
 import sklearn
+import time
 
 st.write(f"sklearn version: {sklearn.__version__}")
 st.header("Semiconductor abnormality classification")
