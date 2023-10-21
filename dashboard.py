@@ -57,8 +57,8 @@ if option=='Visualization':
     index_value = attribute_names.index(attribute_selection)
 
     output_attribute_names = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index_value][1:]) if not np.isnan(value)]
-    output_attribute_text = " ".join(output_attribute_names)
-    st.write(f"{attribute_selection}")
+    output_attribute_text = " ,".join(output_attribute_names)
+    st.write(f"{attribute_selection} is correlated with:")
     st.write(f"{output_attribute_text}")
 
     st.text(" ")
