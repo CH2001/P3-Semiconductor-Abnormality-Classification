@@ -90,6 +90,7 @@ else:
     input_data_df = pd.DataFrame([input_data])
 
     if st.button('Predict'):
+        # Predict output 
         prediction = rf_model.predict(input_data_df)[0]
 
         if prediction == 0: 
@@ -97,9 +98,9 @@ else:
         else: 
             result = "normal"
 
-        st.spinner('Sending input features to model...')
-        time.sleep(2)
-
-        st.success('Prediction is ready')
+        with st.spinner('Sending input features to model...'):
+            time.sleep(2)
+        
+        st.success("Model inference completed!")
 
         st.write(f"This set of sensor data is: {result}")
