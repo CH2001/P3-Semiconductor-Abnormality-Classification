@@ -52,12 +52,71 @@ if option=='Visualization':
     # Get pairwise feature correlation array 
     feature_correlations_array = corr_df.values
 
+    # Filter output based on dropdown selection
     attribute_selection = st.selectbox("Select attributes", options=attribute_names, key=1)
     index_value = attribute_names.index(attribute_selection)
 
-    output_value = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index_value][1:]) if not np.isnan(value)]
-    st.write(f"prop value {output_value}")
+    output_attribute_names = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index_value][1:]) if not np.isnan(value)]
+    st.write(f"prop value {output_attribute_names}")
     st.text(" ")
+
+    # Plot graph 
+    ind_value_corr = [i for i in feature_correlations_array[index_value][1:]]
+    all_attribute_names = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index][1:])]
+
+    boxes_per_row = 8
+    fig = go.Figure()
+
+    for i, (attribute, value) in enumerate(zip(all_attributes_names, ind_value_corr)):
+        row = i // boxes_per_row
+        col = i % boxes_per_row
+
+        x = col
+        y = -row
+
+        if np.isnan(value):
+            color = 'grey'
+        else:
+            color = 'orange'
+
+        attribute_text = f'{attribute}'
+        text = f'Correlation: {value:.4f}' if not np.isnan(value) else attribute
+
+        fig.add_trace(go.Scatter(
+            x=[x],
+            y=[y],
+            mode='markers+text',
+            marker=dict(size=50, color=color, symbol='square'),
+            hoverinfo='text', 
+            hovertext=text,
+            name=attribute_text,
+            text=attribute_text
+        ))
+        
+    fig.update_layout(
+        title='Attribute Boxes',
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(
+            tickvals=list(range(boxes_per_row)),
+            ticktext=attributes[:boxes_per_row], 
+            showline=False,
+            showgrid=False,
+            zeroline=False,
+            showticklabels=False,
+        ),
+        yaxis=dict(
+            showline=False,
+            showgrid=False,
+            zeroline=False,
+            showticklabels=False,
+        ),
+        showlegend=False, 
+        width=1000,
+        height=2000
+    )
+
+    fig.show()
 
 else: 
     st.text('Machine Learning Model App')
