@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 from scipy.io import arff
-from joblib import load
+#from joblib import load
 
 st.header("Semiconductor abnormality classification")
 
