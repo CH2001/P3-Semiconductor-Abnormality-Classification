@@ -1,6 +1,6 @@
 import pandas as pd
 from scipy.io import arff
-from joblib import load
+# from joblib import load
 
 st.header("Semiconductor abnormality classification")
 
@@ -30,7 +30,7 @@ if option=='Visualization':
 
 else: 
     # Load model
-    loaded_model = load('rf_model.joblib')
+    # loaded_model = load('rf_model.joblib')
 
     st.title('Machine Learning Model App')
 
