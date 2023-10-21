@@ -33,7 +33,6 @@ option = st.sidebar.selectbox(
 
 if option=='Visualization':
     st.text(" ")
-    st.text('Data visualization')
 
     def pair_wise(dataframe):
         corr = dataframe.corr().abs()
@@ -103,6 +102,7 @@ if option=='Visualization':
         
     fig.update_layout(
         title_text='Correlation plot',
+        plot_bgcolor='#ebf2ff',
         title_x=0.5,
         title_y=0.95,
         xaxis=dict(
