@@ -97,8 +97,8 @@ else:
         else: 
             result = "normal"
 
-        with st.spinner('Sending input features to model...'):
-            time.sleep(2)
+        st.spinner('Sending input features to model...')
+        time.sleep(2)
 
         st.success('Prediction is ready')
 
