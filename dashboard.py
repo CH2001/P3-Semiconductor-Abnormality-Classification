@@ -49,7 +49,9 @@ if option=='Visualization':
     attribute_selection = st.selectbox("Select attributes", options=attribute_names, key=1)
     index_value = attribute_names.index(attribute_selection)
 
-    st.write(f"prop value {index_value}")
+    output_value = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index_value][1:]) if not np.isnan(value)]
+
+    st.write(f"prop value {output_value}")
 
 else: 
     st.text('Machine Learning Model App')
