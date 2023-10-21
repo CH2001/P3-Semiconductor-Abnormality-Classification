@@ -82,12 +82,14 @@ if option=='Visualization':
 
         attribute_text = f'{attribute}'
         text = f'Correlation: {value:.4f}' if not np.isnan(value) else attribute
+        font_color = 'black'
 
         fig.add_trace(go.Scatter(
             x=[x],
             y=[y],
             mode='markers+text',
             marker=dict(size=50, color=color, symbol='square'),
+            textfont=dict(color=font_color), 
             hoverinfo='text', 
             hovertext=text,
             name=attribute_text,
