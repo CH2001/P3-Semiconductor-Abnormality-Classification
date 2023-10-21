@@ -101,10 +101,7 @@ if option=='Visualization':
         ))
         
     fig.update_layout(
-        title_text='Correlation plot',
-        plot_bgcolor='#ebf2ff',
-        title_x=0.5,
-        title_y=0.95,
+        paper_bgcolor='#ebf2ff',
         xaxis=dict(
             tickvals=list(range(boxes_per_row)),
             ticktext=all_attribute_names[:boxes_per_row], 
