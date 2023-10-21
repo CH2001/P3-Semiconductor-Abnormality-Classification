@@ -2,8 +2,6 @@ import pandas as pd
 import streamlit as st
 from scipy.io import arff
 import pickle
-import sklearn
-from sklearn.ensemble import RandomForestClassifier
 
 st.header("Semiconductor abnormality classification")
 
