@@ -32,6 +32,21 @@ option = st.sidebar.selectbox(
 if option=='Visualization':
     st.title('Data visualization')
 
+    def pair_wise(dataframe):
+        corr = dataframe.corr().abs()
+        corr_df = corr[(corr > 0.7) & (corr < 1)]
+        
+        corr_df.loc["No. of pairs"] = corr_df.count()
+        corr_df.loc["Sum of pairs"] = corr_df.sum()
+        return corr_df
+
+    corr_df = pair_wise(X_train).reset_index()
+
+    attribute_names = [row[0] for row in corr_df.values if isinstance(row[0], str) and row[0].startswith('att')]
+    first_array = corr_df.values[0]
+
+    prop = st.selectbox("Select attributes", options=attribute_names)
+
 else: 
     st.text('Machine Learning Model App')
 
