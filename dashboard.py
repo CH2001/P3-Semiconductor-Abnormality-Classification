@@ -75,8 +75,10 @@ if option=='Visualization':
 
         if np.isnan(value):
             color = '#e6e5e3'
+        elif i == index_value:
+            color = 'red'
         else:
-            color = '#ffd694'
+            color = 'orange'
 
         attribute_text = f'{attribute}'
         text = f'Correlation: {value:.4f}' if not np.isnan(value) else attribute
