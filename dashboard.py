@@ -25,6 +25,7 @@ option = st.sidebar.selectbox(
 )
 
 if option=='Visualization':
+    st.title('Data visualization')
 
 
 else: 
@@ -75,4 +76,4 @@ else:
     att149 = st.slider('Att149', min_value=-4.0, max_value=4.0, value=0.5)
     att151 = st.slider('Att151', min_value=-4.0, max_value=4.0, value=0.5) 
 
-    
+
