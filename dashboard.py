@@ -32,7 +32,7 @@ else:
     st.title('Machine Learning Model App')
 
     # Load model
-    rf_model = load('rf_model.joblib')
+    rf_model = joblib.load('rf_model.joblib')
 
     # Input data
     input_data = {}
