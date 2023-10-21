@@ -33,7 +33,7 @@ if option=='Visualization':
     st.title('Data visualization')
 
 else: 
-    st.title('Machine Learning Model App')
+    st.text('Machine Learning Model App')
 
     # Load the model
     try:
