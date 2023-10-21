@@ -102,6 +102,9 @@ if option=='Visualization':
         ))
         
     fig.update_layout(
+        title_text='Correlation plot',
+        title_x=0.5,
+        title_y=0.95,
         xaxis=dict(
             tickvals=list(range(boxes_per_row)),
             ticktext=all_attribute_names[:boxes_per_row], 
