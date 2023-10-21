@@ -90,4 +90,15 @@ else:
 
     if st.button('Predict'):
         prediction = rf_model.predict(input_data_df)[0]
-        st.write(f"The abnormality status is: {prediction}")
+
+        if prediction == 0: 
+            result = "abnormal"
+        else: 
+            result = "normal"
+
+        with st.spinner('Sending input features to model...'):
+            time.sleep(2)
+
+        st.success('Prediction is ready')
+
+        st.write(f"This set of sensor data is: {result}")
