@@ -102,6 +102,7 @@ if option=='Visualization':
         
     fig.update_layout(
         paper_bgcolor='#ebf2ff',
+        margin=dict(l=0, r=0, b=0, t=0),
         xaxis=dict(
             tickvals=list(range(boxes_per_row)),
             ticktext=all_attribute_names[:boxes_per_row], 
