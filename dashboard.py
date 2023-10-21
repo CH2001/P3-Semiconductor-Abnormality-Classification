@@ -1,11 +1,12 @@
 import pandas as pd
 import streamlit as st
 from scipy.io import arff
+import joblib
 
 st.header("Semiconductor abnormality classification")
 
 option = st.sidebar.selectbox(
-    'Select a plot',
+    'Select page',
      ['Visualization', 'Prediction model']
 )
 
