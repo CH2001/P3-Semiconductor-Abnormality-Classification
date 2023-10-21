@@ -1,6 +1,5 @@
 import pandas as pd
 from scipy.io import arff
-# from joblib import load
 
 st.header("Semiconductor abnormality classification")
 
