@@ -12,6 +12,9 @@ def import_dataset(dataset):
     df = pd.DataFrame(raw_data)
     return df
 
+# Load model
+rf_model = pickle.load(open('rf_model.pkl','rb'))
+
 # Import data 
 df_train = import_dataset('Wafer_TRAIN.arff')
 df_test = import_dataset('Wafer_TEST.arff')
@@ -30,9 +33,6 @@ if option=='Visualization':
 
 else: 
     st.title('Machine Learning Model App')
-
-    # Load model
-    loaded_model = pickle.load(open('rf_model.pkl','rb'))
 
     # Input data
     input_data = {}
