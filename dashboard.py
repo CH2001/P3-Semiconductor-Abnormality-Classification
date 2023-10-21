@@ -5,6 +5,7 @@ import pickle
 import numpy as np
 import sklearn
 import time
+import plotly.graph_objects as go
 
 st.header("Semiconductor abnormality classification")
 
@@ -31,6 +32,7 @@ option = st.sidebar.selectbox(
 )
 
 if option=='Visualization':
+    st.text(" ")
     st.text('Data visualization')
 
     def pair_wise(dataframe):
@@ -41,17 +43,21 @@ if option=='Visualization':
         corr_df.loc["Sum of pairs"] = corr_df.sum()
         return corr_df
 
+    # Get paiwise attribute correlation
     corr_df = pair_wise(X_train).reset_index()
 
+    # Get feature names 
     attribute_names = [row[0] for row in corr_df.values if isinstance(row[0], str) and row[0].startswith('att')]
+    
+    # Get pairwise feature correlation array 
     feature_correlations_array = corr_df.values
 
     attribute_selection = st.selectbox("Select attributes", options=attribute_names, key=1)
     index_value = attribute_names.index(attribute_selection)
 
     output_value = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index_value][1:]) if not np.isnan(value)]
-
     st.write(f"prop value {output_value}")
+    st.text(" ")
 
 else: 
     st.text('Machine Learning Model App')
