@@ -99,7 +99,7 @@ if option=='Visualization':
         paper_bgcolor='rgba(0,0,0,0)',
         xaxis=dict(
             tickvals=list(range(boxes_per_row)),
-            ticktext=attributes[:boxes_per_row], 
+            ticktext=all_attribute_names[:boxes_per_row], 
             showline=False,
             showgrid=False,
             zeroline=False,
