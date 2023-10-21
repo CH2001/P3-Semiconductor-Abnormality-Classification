@@ -4,7 +4,18 @@ from scipy.io import arff
 import pickle
 
 st.header("Semiconductor abnormality classification")
+
+import os
+
+# Print the current working directory for debugging
+st.write(f"current dir: {os.getcwd()}")
 st.write(f"pickle version: {pickle.format_version}")
+current_directory = os.getcwd()
+
+files_in_directory = [f for f in os.listdir(current_directory) if os.path.isfile(os.path.join(current_directory, f)]
+
+for file_name in files_in_directory:
+    st.write(f"pickle version: {file_name}")
 
 def import_dataset(dataset): 
     with open(dataset, 'r', encoding='utf-8') as file:
@@ -12,6 +23,14 @@ def import_dataset(dataset):
 
     df = pd.DataFrame(raw_data)
     return df
+
+# Load the model
+try:
+    with open('rf_model.pkl', 'rb') as model_file:
+        rf_model = pickle.load(model_file)
+
+except Exception as e:
+    st.error(f"Error loading the model: {str(e)}")
 
 # Load model
 rf_model = pickle.load(open('rf_model.pkl','rb'))
