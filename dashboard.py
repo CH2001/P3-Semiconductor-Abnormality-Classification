@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 from scipy.io import arff
-import joblib
+import pickle
 
 st.header("Semiconductor abnormality classification")
 
@@ -32,7 +32,8 @@ else:
     st.title('Machine Learning Model App')
 
     # Load model
-    rf_model = joblib.load('rf_model.joblib')
+    with open('rf_model.pkl', 'rb') as model_file:
+        rf_model = pickle.load(model_file)
 
     # Input data
     input_data = {}
@@ -80,6 +81,6 @@ else:
 
     input_data_df = pd.DataFrame([input_data])
 
-    prediction = rf_model.predict(input_data_df)[0]
-
-    st.write(f"The abnormality status is: {prediction}")
+    if st.button('Predict'):
+        prediction = rf_model.predict(input_data_df)[0]
+        st.write(f"The abnormality status is: {prediction}")
