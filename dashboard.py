@@ -23,6 +23,8 @@ df_test = import_dataset('Wafer_TEST.arff')
 df_train['target'] = df_train['target'].replace({b'1': 1, b'-1': 0})
 df_test['target'] = df_test['target'].replace({b'1': 1, b'-1': 0})
 
+X_train = df_train.loc[:, df_train.columns[0:-1]].copy()
+
 option = st.sidebar.selectbox(
     'Select page',
      ['Visualization', 'Prediction model']
