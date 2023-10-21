@@ -73,10 +73,10 @@ if option=='Visualization':
         x = col
         y = -row
 
-        if np.isnan(value):
+        if i == index_value:
+            color = '#FF0000'
+        elif np.isnan(value):
             color = '#e6e5e3'
-        elif i == index_value:
-            color = 'red'
         else:
             color = 'orange'
 
