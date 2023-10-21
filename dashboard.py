@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 from scipy.io import arff
 import pickle
+import numpy as np
 import sklearn
 
 st.write(f"sklearn version: {sklearn.__version__}")
