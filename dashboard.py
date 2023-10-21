@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 from scipy.io import arff
 import pickle
+import sklearn
 
 st.header("Semiconductor abnormality classification")
 
