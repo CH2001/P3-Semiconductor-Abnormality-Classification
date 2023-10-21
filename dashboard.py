@@ -94,7 +94,6 @@ if option=='Visualization':
         ))
         
     fig.update_layout(
-        title='Attribute Boxes',
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
         xaxis=dict(
