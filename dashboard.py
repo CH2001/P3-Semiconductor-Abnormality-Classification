@@ -3,6 +3,7 @@ import streamlit as st
 from scipy.io import arff
 import pickle
 import numpy as np
+from sklearn.metrics import classification_report
 import sklearn
 
 st.write(f"sklearn version: {sklearn.__version__}")
