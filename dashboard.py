@@ -44,10 +44,12 @@ if option=='Visualization':
     corr_df = pair_wise(X_train).reset_index()
 
     attribute_names = [row[0] for row in corr_df.values if isinstance(row[0], str) and row[0].startswith('att')]
-    first_array = corr_df.values[0]
+    feature_correlations_array = corr_df.values
 
-    prop = st.selectbox("Select attributes", options=attribute_names, key=1)
-    st.write(f"prop value {prop}")
+    attribute_selection = st.selectbox("Select attributes", options=attribute_names, key=1)
+    index_value = attribute_names.index(attribute_selection)
+
+    st.write(f"prop value {index_value}")
 
 else: 
     st.text('Machine Learning Model App')
