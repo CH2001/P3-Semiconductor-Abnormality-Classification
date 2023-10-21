@@ -118,7 +118,7 @@ if option=='Visualization':
         ),
         showlegend=False, 
         width=1000,
-        height=1500
+        height=1300
     )
 
     fig.show()
