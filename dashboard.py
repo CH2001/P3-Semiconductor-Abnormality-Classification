@@ -31,7 +31,7 @@ option = st.sidebar.selectbox(
 )
 
 if option=='Visualization':
-    st.title('Data visualization')
+    st.text('Data visualization')
 
     def pair_wise(dataframe):
         corr = dataframe.corr().abs()
@@ -47,6 +47,7 @@ if option=='Visualization':
     first_array = corr_df.values[0]
 
     prop = st.selectbox("Select attributes", options=attribute_names, key=1)
+    st.write(f"prop value {prop}")
 
 else: 
     st.text('Machine Learning Model App')
