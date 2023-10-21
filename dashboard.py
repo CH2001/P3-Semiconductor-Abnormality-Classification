@@ -4,6 +4,7 @@ from scipy.io import arff
 import pickle
 
 st.header("Semiconductor abnormality classification")
+st.write(f"pickle version: {pickle.format_version}")
 
 def import_dataset(dataset): 
     with open(dataset, 'r', encoding='utf-8') as file:
