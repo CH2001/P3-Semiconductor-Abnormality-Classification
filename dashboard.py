@@ -67,7 +67,7 @@ if option=='Visualization':
     boxes_per_row = 8
     fig = go.Figure()
 
-    for i, (attribute, value) in enumerate(zip(all_attributes_names, ind_value_corr)):
+    for i, (attribute, value) in enumerate(zip(all_attribute_names, ind_value_corr)):
         row = i // boxes_per_row
         col = i % boxes_per_row
 
