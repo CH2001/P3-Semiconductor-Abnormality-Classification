@@ -32,8 +32,7 @@ else:
     st.title('Machine Learning Model App')
 
     # Load model
-    with open('rf_model.pkl', 'rb') as model_file:
-        rf_model = pickle.load(model_file)
+    loaded_model = pickle.load(open('rf_model.pkl','rb'))
 
     # Input data
     input_data = {}
