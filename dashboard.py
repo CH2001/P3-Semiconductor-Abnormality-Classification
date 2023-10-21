@@ -12,7 +12,7 @@ st.write(f"current dir: {os.getcwd()}")
 st.write(f"pickle version: {pickle.format_version}")
 current_directory = os.getcwd()
 
-files_in_directory = [f for f in os.listdir(current_directory) if os.path.isfile(os.path.join(current_directory, f)]
+files_in_directory = [f for f in os.listdir(current_directory) if os.path.isfile(os.path.join(current_directory, f))]
 
 for file_name in files_in_directory:
     st.write(f"pickle version: {file_name}")
