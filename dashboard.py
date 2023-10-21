@@ -6,7 +6,6 @@ import numpy as np
 import sklearn
 import time
 
-st.write(f"sklearn version: {sklearn.__version__}")
 st.header("Semiconductor abnormality classification")
 
 def import_dataset(dataset): 
@@ -45,7 +44,7 @@ if option=='Visualization':
     attribute_names = [row[0] for row in corr_df.values if isinstance(row[0], str) and row[0].startswith('att')]
     first_array = corr_df.values[0]
 
-    prop = st.selectbox("Select attributes", options=attribute_names)
+    prop = st.selectbox("Select attributes", options=attribute_names, key=1)
 
 else: 
     st.text('Machine Learning Model App')
