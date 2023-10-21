@@ -101,6 +101,6 @@ else:
         with st.spinner('Sending input features to model...'):
             time.sleep(2)
         
-        st.success("Model inference completed!")
+        # st.success("Model inference completed!")
 
         st.write(f"This set of sensor data is: {result}")
