@@ -3,7 +3,7 @@ import streamlit as st
 from scipy.io import arff
 import pickle
 import sklearn
-
+st.write(f"sklearn version: {sklearn.__version__}")
 st.header("Semiconductor abnormality classification")
 
 def import_dataset(dataset): 
