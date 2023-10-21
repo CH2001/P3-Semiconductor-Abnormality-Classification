@@ -61,7 +61,7 @@ if option=='Visualization':
 
     st.text(" ")
     st.text('Feature correlation visualization')
-    
+
     # Plot graph 
     ind_value_corr = [i for i in feature_correlations_array[index_value][1:]]
     all_attribute_names = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index_value][1:])]
@@ -100,8 +100,6 @@ if option=='Visualization':
         ))
         
     fig.update_layout(
-        plot_bgcolor='rgba(0,0,0,0)',
-        paper_bgcolor='rgba(0,0,0,0)',
         xaxis=dict(
             tickvals=list(range(boxes_per_row)),
             ticktext=all_attribute_names[:boxes_per_row], 
