@@ -59,6 +59,7 @@ if option=='Visualization':
     output_attribute_names = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index_value][1:]) if not np.isnan(value)]
     st.write(f"prop value {output_attribute_names}")
 
+    st.text('Feature correlation visualization')
     # Plot graph 
     ind_value_corr = [i for i in feature_correlations_array[index_value][1:]]
     all_attribute_names = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index_value][1:])]
@@ -97,7 +98,6 @@ if option=='Visualization':
         ))
         
     fig.update_layout(
-        title='Feature correlation visualization', 
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
         xaxis=dict(
