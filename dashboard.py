@@ -46,16 +46,16 @@ option = st.sidebar.selectbox(
 if option=='Visualization':
     st.text(" ")
 
-    fig1 = go.Figure()
+    fig = go.Figure()
 
-    fig1.add_trace(go.Scatter(x=all_attribute_names, 
+    fig.add_trace(go.Scatter(x=all_attribute_names, 
                             y=mean_abnormal, mode='lines', 
                             name='Abnormal', 
                             line=dict(color='orange'), 
                             hovertemplate='Mean of %{x} = %{y:.2f}<extra></extra>'
                             )
                 )
-    fig1.add_trace(go.Scatter(x=all_attribute_names, 
+    fig.add_trace(go.Scatter(x=all_attribute_names, 
                             y=mean_normal, mode='lines', 
                             name='Normal', 
                             line=dict(color='#757575'), 
@@ -63,16 +63,16 @@ if option=='Visualization':
                             )
                 )
 
-    fig1.update_layout(
+    fig.update_layout(
         title='Mean sensor value for abnormal vs normal records',
         xaxis_title='Attributes',
         yaxis_title='Mean Value',
         xaxis=dict(categoryorder='array', categoryarray=attribute_names)
     )
 
-    fig1.show()
+    fig.show()
 
-    st.plotly_chart(fig1, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
     st.text(" ")
     st.text(" ")
