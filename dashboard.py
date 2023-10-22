@@ -46,36 +46,6 @@ option = st.sidebar.selectbox(
 if option=='Visualization':
     st.text(" ")
 
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatter(x=all_attribute_names, 
-                            y=mean_abnormal, mode='lines', 
-                            name='Abnormal', 
-                            line=dict(color='orange'), 
-                            hovertemplate='Mean of %{x} = %{y:.2f}<extra></extra>'
-                            )
-                )
-    fig.add_trace(go.Scatter(x=all_attribute_names, 
-                            y=mean_normal, mode='lines', 
-                            name='Normal', 
-                            line=dict(color='#757575'), 
-                            hovertemplate='Mean of %{x} = %{y:.2f}<extra></extra>'
-                            )
-                )
-
-    fig.update_layout(
-        title='Mean sensor value for abnormal vs normal records',
-        xaxis_title='Attributes',
-        yaxis_title='Mean Value',
-        xaxis=dict(categoryorder='array', categoryarray=attribute_names)
-    )
-
-    fig.show()
-
-    st.plotly_chart(fig, use_container_width=True)
-
-    st.text(" ")
-    st.text(" ")
     # Get paiwise attribute correlation
     corr_df = pair_wise(X_train).reset_index()
 
@@ -84,6 +54,38 @@ if option=='Visualization':
     
     # Get pairwise feature correlation array 
     feature_correlations_array = corr_df.values
+
+    
+    fig1 = go.Figure()
+
+    fig1.add_trace(go.Scatter(x=[i for i in df_train.columns if i != 'target'], 
+                            y=mean_abnormal, mode='lines', 
+                            name='Abnormal', 
+                            line=dict(color='orange'), 
+                            hovertemplate='Mean of %{x} = %{y:.2f}<extra></extra>'
+                            )
+                )
+    fig1.add_trace(go.Scatter(x=[i for i in df_train.columns if i != 'target'], 
+                            y=mean_normal, mode='lines', 
+                            name='Normal', 
+                            line=dict(color='#757575'), 
+                            hovertemplate='Mean of %{x} = %{y:.2f}<extra></extra>'
+                            )
+                )
+
+    fig1.update_layout(
+        title='Mean sensor value for abnormal vs normal records',
+        xaxis_title='Attributes',
+        yaxis_title='Mean Value',
+        xaxis=dict(categoryorder='array', categoryarray=attribute_names)
+    )
+
+    fig1.show()
+
+    st.plotly_chart(fig1, use_container_width=True)
+
+    st.text(" ")
+    st.text(" ")
 
     # Filter output based on dropdown selection
     attribute_selection = st.selectbox("Select attributes", options=attribute_names, key=1)
