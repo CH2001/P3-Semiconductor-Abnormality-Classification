@@ -16,13 +16,25 @@ def import_dataset(dataset):
     df = pd.DataFrame(raw_data)
     return df
 
+def pair_wise(dataframe):
+    corr = dataframe.corr().abs()
+    corr_df = corr[(corr > 0.7) & (corr < 1)]
+    
+    corr_df.loc["No. of pairs"] = corr_df.count()
+    corr_df.loc["Sum of pairs"] = corr_df.sum()
+    return corr_df
+
 # Import data 
 df_train = import_dataset('Wafer_TRAIN.arff')
-df_test = import_dataset('Wafer_TEST.arff')
 
 # Replace character target to binary 
 df_train['target'] = df_train['target'].replace({b'1': 1, b'-1': 0})
-df_test['target'] = df_test['target'].replace({b'1': 1, b'-1': 0})
+
+df_normal = df_train[df_train['target']==1]
+mean_normal = df_normal[[i for i in df_normal.columns if i != 'target']].mean()
+
+df_abnormal = df_train[df_train['target']==0]
+mean_abnormal = df_abnormal[[i for i in df_abnormal.columns if i != 'target']].mean()
 
 X_train = df_train.loc[:, df_train.columns[0:-1]].copy()
 
@@ -34,14 +46,36 @@ option = st.sidebar.selectbox(
 if option=='Visualization':
     st.text(" ")
 
-    def pair_wise(dataframe):
-        corr = dataframe.corr().abs()
-        corr_df = corr[(corr > 0.7) & (corr < 1)]
-        
-        corr_df.loc["No. of pairs"] = corr_df.count()
-        corr_df.loc["Sum of pairs"] = corr_df.sum()
-        return corr_df
+    fig1 = go.Figure()
 
+    fig1.add_trace(go.Scatter(x=all_attribute_names, 
+                            y=mean_abnormal, mode='lines', 
+                            name='Abnormal', 
+                            line=dict(color='orange'), 
+                            hovertemplate='Mean of %{x} = %{y:.2f}<extra></extra>'
+                            )
+                )
+    fig1.add_trace(go.Scatter(x=all_attribute_names, 
+                            y=mean_normal, mode='lines', 
+                            name='Normal', 
+                            line=dict(color='#757575'), 
+                            hovertemplate='Mean of %{x} = %{y:.2f}<extra></extra>'
+                            )
+                )
+
+    fig1.update_layout(
+        title='Mean sensor value for abnormal vs normal records',
+        xaxis_title='Attributes',
+        yaxis_title='Mean Value',
+        xaxis=dict(categoryorder='array', categoryarray=attribute_names)
+    )
+
+    fig1.show()
+
+    st.plotly_chart(fig1, use_container_width=True)
+
+    st.text(" ")
+    st.text(" ")
     # Get paiwise attribute correlation
     corr_df = pair_wise(X_train).reset_index()
 
@@ -66,7 +100,7 @@ if option=='Visualization':
     all_attribute_names = [att_name for att_name, value in zip(attribute_names, feature_correlations_array[index_value][1:])]
 
     boxes_per_row = 8
-    fig = go.Figure()
+    fig2 = go.Figure()
 
     for i, (attribute, value) in enumerate(zip(all_attribute_names, ind_value_corr)):
         row = i // boxes_per_row
@@ -86,7 +120,7 @@ if option=='Visualization':
         text = f'Correlation: {value:.4f}' if not np.isnan(value) else attribute
         font_color = 'black'
 
-        fig.add_trace(go.Scatter(
+        fig2.add_trace(go.Scatter(
             x=[x],
             y=[y],
             mode='markers+text',
@@ -98,7 +132,7 @@ if option=='Visualization':
             text=attribute_text
         ))
         
-    fig.update_layout(
+    fig2.update_layout(
         plot_bgcolor='#ebf2ff',
         margin=dict(l=0, r=0, b=0, t=0),
         xaxis=dict(
@@ -120,12 +154,14 @@ if option=='Visualization':
         height=1500
     )
 
-    fig.show()
-    st.plotly_chart(fig, use_container_width=True)
+    fig2.show()
+    st.plotly_chart(fig2, use_container_width=True)
 
     with st.expander("See correlated variables in text"):
         st.write(f"{attribute_selection} is correlated with:")
         st.write(f"{output_attribute_text}")
+    
+
 
 else: 
     st.text('Machine Learning Model App')
