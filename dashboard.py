@@ -297,7 +297,7 @@ else:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
         st.dataframe(selected_records_df)
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3 = st.columns([6, 2, 2])
         with col1:
             delete_index = st.selectbox("Delete record no.", range(1, len(selected_records_df) + 1))
         with col2:
