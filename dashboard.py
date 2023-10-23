@@ -311,16 +311,27 @@ else:
         st.write("No records added yet.")
 
 
+    if st.session_state.selected_records:
+        if st.button('Reset Table', key="reset-button"): 
+            st.session_state.selected_records = []
+            st.success("Table reset. No records.")
+        if st.button('Download CSV', key="download-button"):
+            selected_records_df = pd.DataFrame(st.session_state.selected_records)
+            csv = selected_records_df.to_csv(index=False)
+            b64 = base64.b64encode(csv.encode()).decode()
+            href = f'<a href="data:file/csv;base64,{b64}" download="selected_records.csv">Click here to download</a>'
+            st.markdown(href, unsafe_allow_html=True)
 
-    # Add a button to reset the table
-    if st.button('Reset Table'):
-        st.session_state.selected_records = []
-        st.success("Table reset. No records.")
 
-    # Add a button to download the dataset as a CSV
-    if st.button('Download CSV') and st.session_state.selected_records:
-        selected_records_df = pd.DataFrame(st.session_state.selected_records)
-        csv = selected_records_df.to_csv(index=False)
-        b64 = base64.b64encode(csv.encode()).decode()
-        href = f'<a href="data:file/csv;base64,{b64}" download="selected_records.csv">Click here to download</a>'
-        st.markdown(href, unsafe_allow_html=True)
+    # # Add a button to reset the table
+    # if st.button('Reset Table'):
+    #     st.session_state.selected_records = []
+    #     st.success("Table reset. No records.")
+
+    # # Add a button to download the dataset as a CSV
+    # if st.button('Download CSV') and st.session_state.selected_records:
+    #     selected_records_df = pd.DataFrame(st.session_state.selected_records)
+    #     csv = selected_records_df.to_csv(index=False)
+    #     b64 = base64.b64encode(csv.encode()).decode()
+    #     href = f'<a href="data:file/csv;base64,{b64}" download="selected_records.csv">Click here to download</a>'
+    #     st.markdown(href, unsafe_allow_html=True)
