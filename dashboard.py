@@ -288,9 +288,7 @@ else:
         result = add_record(input_data, rf_model)
         with st.spinner('Sending input features to model...'):
             time.sleep(2)
-        st.write(f"Predicted output is: {result}")
-        #st.write("Record added.")
-        st.success(f"Predicted output is: {result}    Record added.")
+        st.success(f"Record added. Predicted output is: {result}")
         time.sleep(1)
         st.empty() 
 
@@ -299,7 +297,7 @@ else:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
         st.dataframe(selected_records_df)
 
-        col1, col2, col3 = st.columns([6, 1, 3])
+        col1, col2, col3 = st.columns([6, 1.5, 2.5])
         with col1:
             delete_index = st.selectbox("Delete record no.", range(1, len(selected_records_df) + 1))
         with col2:
