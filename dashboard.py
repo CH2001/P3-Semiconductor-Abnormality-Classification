@@ -277,31 +277,20 @@ else:
 
     input_data_df = pd.DataFrame([input_data])
 
-    if st.button('Add +'):
-        record = predict_and_append_record(input_data, rf_model)
-        st.write(f"Added record: {record}")
+    if st.button('Predict'):
+        add_record(input_data, rf_model)
+        st.write("Record added.")
 
-    if st.button('Remove Last Record') and selected_records:
-        removed_record = selected_records.pop()
-        st.write(f"Removed record: {removed_record}")
-
-    if st.button('Download CSV'):
-        if selected_records:
-            selected_records_df = pd.DataFrame(selected_records)
-            st.dataframe(selected_records_df)
-            st.download_button(
-                "Download CSV",
-                selected_records_df.to_csv(index=False),
-                key="download-csv"
-            )
-
-    # Additional display of selected records
     st.title("Selected Records")
     if selected_records:
         selected_records_df = pd.DataFrame(selected_records)
         st.dataframe(selected_records_df)
     else:
         st.write("No records added yet.")
+
+    if st.button('Download CSV') and selected_records:
+        selected_records_df.to_csv("selected_records.csv", index=False)
+        st.success("Downloaded selected records as 'selected_records.csv'.")
 
     # st.text(" ")
     # if st.button('Predict'):
