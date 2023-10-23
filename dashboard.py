@@ -176,9 +176,12 @@ else:
     except Exception as e:
         st.error(f"Error loading the model: {str(e)}")
 
-    selected_records = []
 
-    def predict_and_append_record(input_data, rf_model):
+    if 'selected_records' not in st.session_state:
+        st.session_state.selected_records = []
+
+    # Function to add a record to selected_records
+    def add_record(input_data, rf_model):
         input_data_df = pd.DataFrame([input_data])
         prediction = rf_model.predict(input_data_df)[0]
 
@@ -188,8 +191,9 @@ else:
             result = "normal"
 
         record = {**input_data, "Prediction": result}
-        selected_records.append(record)
-        return record
+        st.session_state.selected_records.append(record)
+
+
 
     # Input data
     input_data = {}
@@ -277,20 +281,30 @@ else:
 
     input_data_df = pd.DataFrame([input_data])
 
+
     if st.button('Predict'):
         add_record(input_data, rf_model)
         st.write("Record added.")
 
+    # Display selected records
     st.title("Selected Records")
-    if selected_records:
-        selected_records_df = pd.DataFrame(selected_records)
+    if st.session_state.selected_records:
+        selected_records_df = pd.DataFrame(st.session_state.selected_records)
         st.dataframe(selected_records_df)
     else:
         st.write("No records added yet.")
 
-    if st.button('Download CSV') and selected_records:
-        selected_records_df.to_csv("selected_records.csv", index=False)
-        st.success("Downloaded selected records as 'selected_records.csv'.")
+    # Add a button to download the dataset as a CSV
+    if st.button('Download CSV') and st.session_state.selected_records:
+        selected_records_df = pd.DataFrame(st.session_state.selected_records)
+        st.download_button(
+            "Download CSV",
+            selected_records_df.to_csv(index=False),
+            key="download-csv"
+        )
+
+
+
 
     # st.text(" ")
     # if st.button('Predict'):
