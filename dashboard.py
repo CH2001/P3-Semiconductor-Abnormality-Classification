@@ -180,6 +180,9 @@ else:
     if 'selected_records' not in st.session_state:
         st.session_state.selected_records = []
 
+    if 'download_clicked' not in st.session_state:
+        st.session_state.download_clicked = False
+
     # Function to add a record to selected_records
     def add_record(input_data, rf_model):
         input_data_df = pd.DataFrame([input_data])
@@ -304,12 +307,15 @@ else:
     #         selected_records_df.to_csv(index=False),
     #         key="download-csv"
     #     )
-    if st.button('Download CSV') and st.session_state.selected_records:
+
+    if not st.session_state.download_clicked and st.button('Download CSV') and st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
-        download_button = st.empty()  # Create an empty container
-        download_button.button("Download CSV", selected_records_df.to_csv(index=False), key="download-csv")
-
-
+        st.download_button(
+            "Download CSV",
+            selected_records_df.to_csv(index=False),
+            key="download-csv"
+        )
+        st.session_state.download_clicked = True
 
 
     # st.text(" ")
