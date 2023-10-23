@@ -299,7 +299,7 @@ else:
         st.text("Delete:")
         col1, col2 = st.columns(2)
         with col1:
-            delete_index = st.selectbox("Record No:", range(1, len(selected_records_df) + 1))
+            delete_index = st.selectbox(range(1, len(selected_records_df) + 1))
         with col2:
             if st.button("Delete"):
                 remove_record(delete_index - 1)
