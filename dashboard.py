@@ -296,10 +296,10 @@ else:
     if st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
         st.dataframe(selected_records_df)
-        st.text("Delete record no.:")
+
         col1, col2 = st.columns(2)
         with col1:
-            delete_index = st.selectbox("", range(1, len(selected_records_df) + 1))
+            delete_index = st.selectbox("Delete record no.", range(1, len(selected_records_df) + 1))
         with col2:
             st.markdown("<br>", unsafe_allow_html=True)
             if st.button("Delete"):
