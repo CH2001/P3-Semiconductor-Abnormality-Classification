@@ -289,8 +289,8 @@ else:
         with st.spinner('Sending input features to model...'):
             time.sleep(2)
         st.success(f"Record added. Predicted output is: {result}")
-        time.sleep(1)
-        st.empty() 
+        st.text(" ")
+        st.text(" ")
 
     st.write("<h5>Selected Records</h5>", unsafe_allow_html=True)
     if st.session_state.selected_records:
