@@ -176,6 +176,21 @@ else:
     except Exception as e:
         st.error(f"Error loading the model: {str(e)}")
 
+    selected_records = []
+
+    def predict_and_append_record(input_data, rf_model):
+        input_data_df = pd.DataFrame([input_data])
+        prediction = rf_model.predict(input_data_df)[0]
+
+        if prediction == 0:
+            result = "abnormal"
+        else:
+            result = "normal"
+
+        record = {**input_data, "Prediction": result}
+        selected_records.append(record)
+        return record
+
     # Input data
     input_data = {}
     input_data['att1'] = st.slider('Att1', min_value=-4.0, max_value=4.0, value=0.5)
@@ -262,17 +277,43 @@ else:
 
     input_data_df = pd.DataFrame([input_data])
 
-    st.text(" ")
-    if st.button('Predict'):
-        # Predict output 
-        prediction = rf_model.predict(input_data_df)[0]
+    if st.button('Add +'):
+        record = predict_and_append_record(input_data, rf_model)
+        st.write(f"Added record: {record}")
 
-        if prediction == 0: 
-            result = "abnormal"
-        else: 
-            result = "normal"
+    if st.button('Remove Last Record') and selected_records:
+        removed_record = selected_records.pop()
+        st.write(f"Removed record: {removed_record}")
 
-        with st.spinner('Sending input features to model...'):
-            time.sleep(2)
+    if st.button('Download CSV'):
+        if selected_records:
+            selected_records_df = pd.DataFrame(selected_records)
+            st.dataframe(selected_records_df)
+            st.download_button(
+                "Download CSV",
+                selected_records_df.to_csv(index=False),
+                key="download-csv"
+            )
 
-        st.write(f"This set of sensor data is: {result}")
+    # Additional display of selected records
+    st.title("Selected Records")
+    if selected_records:
+        selected_records_df = pd.DataFrame(selected_records)
+        st.dataframe(selected_records_df)
+    else:
+        st.write("No records added yet.")
+
+    # st.text(" ")
+    # if st.button('Predict'):
+    #     # Predict output 
+    #     prediction = rf_model.predict(input_data_df)[0]
+
+    #     if prediction == 0: 
+    #         result = "abnormal"
+    #     else: 
+    #         result = "normal"
+
+    #     with st.spinner('Sending input features to model...'):
+    #         time.sleep(2)
+
+    #     st.write(f"This set of sensor data is: {result}")
