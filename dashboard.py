@@ -290,7 +290,7 @@ else:
             time.sleep(2)
         st.write(f"Predicted output is: {result}")
         #st.write("Record added.")
-        st.success("Record added.")
+        st.success(f"Predicted output is: {result}    Record added.")
         time.sleep(1)
         st.empty() 
 
