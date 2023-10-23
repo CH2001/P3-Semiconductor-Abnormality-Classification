@@ -167,7 +167,7 @@ if option=='Visualization':
 
 
 else: 
-    st.text('Machine Learning Model App')
+    st.write("<h4>Make your predictions here</h4>", unsafe_allow_html=True)
 
     # Load the model
     try:
@@ -194,8 +194,6 @@ else:
         record = {**input_data, "Prediction": result}
         st.session_state.selected_records.append(record)
         return result
-
-
 
     # Input data
     input_data = {}
@@ -283,7 +281,6 @@ else:
 
     input_data_df = pd.DataFrame([input_data])
 
-
     if st.button('Predict'):
         result = add_record(input_data, rf_model)
         with st.spinner('Sending input features to model...'):
@@ -292,7 +289,7 @@ else:
         st.write("Record added.")
 
     # Display selected records
-    st.write("<h3>Selected Records</h3>", unsafe_allow_html=True)
+    st.write("<h4>Selected Records</h4>", unsafe_allow_html=True)
     if st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
         st.dataframe(selected_records_df)
