@@ -297,13 +297,17 @@ else:
         st.write("No records added yet.")
 
     # Add a button to download the dataset as a CSV
+    # if st.button('Download CSV') and st.session_state.selected_records:
+    #     selected_records_df = pd.DataFrame(st.session_state.selected_records)
+    #     st.download_button(
+    #         "Download CSV",
+    #         selected_records_df.to_csv(index=False),
+    #         key="download-csv"
+    #     )
     if st.button('Download CSV') and st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
-        st.download_button(
-            "Download CSV",
-            selected_records_df.to_csv(index=False),
-            key="download-csv"
-        )
+        download_button = st.empty()  # Create an empty container
+        download_button.button("Download CSV", selected_records_df.to_csv(index=False), key="download-csv")
 
 
 
