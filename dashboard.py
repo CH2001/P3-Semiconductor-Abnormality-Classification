@@ -291,20 +291,8 @@ else:
         st.write(f"Predicted output is: {result}")
         #st.write("Record added.")
         st.success("Record added.")
-        st.markdown(
-            f"""
-            <style>
-            .stSuccess {{
-                animation: fadeOut 1s;
-            }}
-            @keyframes fadeOut {{
-                0% {{ opacity: 1; }}
-                100% {{ opacity: 0; }}
-            }}
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+        time.sleep(1)
+        st.empty() 
 
     st.write("<h4>Selected Records</h4>", unsafe_allow_html=True)
     if st.session_state.selected_records:
