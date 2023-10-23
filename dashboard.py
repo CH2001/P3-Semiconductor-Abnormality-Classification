@@ -180,9 +180,6 @@ else:
     if 'selected_records' not in st.session_state:
         st.session_state.selected_records = []
 
-    if 'download_clicked' not in st.session_state:
-        st.session_state.download_clicked = False
-
     # Function to add a record to selected_records
     def add_record(input_data, rf_model):
         input_data_df = pd.DataFrame([input_data])
@@ -288,6 +285,8 @@ else:
 
     if st.button('Predict'):
         result = add_record(input_data, rf_model)
+        with st.spinner('Sending input features to model...'):
+            time.sleep(2)
         st.write(f"Predicted output is: {result}")
         st.write("Record added.")
 
@@ -300,22 +299,15 @@ else:
         st.write("No records added yet.")
 
     # Add a button to download the dataset as a CSV
-    # if st.button('Download CSV') and st.session_state.selected_records:
-    #     selected_records_df = pd.DataFrame(st.session_state.selected_records)
-    #     st.download_button(
-    #         "Download CSV",
-    #         selected_records_df.to_csv(index=False),
-    #         key="download-csv"
-    #     )
-
-    if not st.session_state.download_clicked and st.button('Download CSV') and st.session_state.selected_records:
+    if st.button('Download CSV') and st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
-        st.download_button(
-            "Download CSV",
-            selected_records_df.to_csv(index=False),
-            key="download-csv"
-        )
-        st.session_state.download_clicked = True
+        # st.download_button(
+        #     "Download CSV",
+        #     selected_records_df.to_csv(index=False),
+        #     key="download-csv"
+        # )
+        st.markdown(f'<a href="data:file/csv;base64,{selected_records_df.to_csv(index=False).encode().decode()}" download="selected_records.csv">Click here to download</a>', unsafe_allow_html=True)
+        download_clicked = True
 
 
     # st.text(" ")
