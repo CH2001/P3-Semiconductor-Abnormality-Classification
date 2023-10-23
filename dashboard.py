@@ -6,6 +6,7 @@ import numpy as np
 import sklearn
 import time
 import plotly.graph_objects as go
+import base64
 
 st.header("Semiconductor abnormality classification")
 
