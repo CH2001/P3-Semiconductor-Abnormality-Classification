@@ -292,7 +292,7 @@ else:
         st.write("Record added.")
 
     # Display selected records
-    st.title("Selected Records")
+    st.write("<h3>Selected Records</h3>", unsafe_allow_html=True)
     if st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
         st.dataframe(selected_records_df)
