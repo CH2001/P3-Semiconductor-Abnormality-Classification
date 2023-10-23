@@ -192,6 +192,7 @@ else:
 
         record = {**input_data, "Prediction": result}
         st.session_state.selected_records.append(record)
+        return result
 
 
 
@@ -283,7 +284,8 @@ else:
 
 
     if st.button('Predict'):
-        add_record(input_data, rf_model)
+        result = add_record(input_data, rf_model)
+        st.write(f"Predicted output is: {result}")
         st.write("Record added.")
 
     # Display selected records
