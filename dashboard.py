@@ -297,11 +297,11 @@ else:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
         st.dataframe(selected_records_df)
         st.text("Delete:")
-        with st.form("delete-form"):
+        col1, col2 = st.columns(2)
+        with col1:
             delete_index = st.selectbox("Record No:", range(1, len(selected_records_df) + 1))
-            delete_button = st.form_submit_button("Delete")
-            
-            if delete_button:
+        with col2:
+            if st.button("Delete"):
                 remove_record(delete_index - 1)
         # delete_index = st.selectbox("Record No:", range(1, len(selected_records_df) + 1))
 
