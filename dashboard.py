@@ -295,7 +295,10 @@ else:
     st.write("<h4>Selected Records</h4>", unsafe_allow_html=True)
     if st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
-        for index, record in selected_records_df.iterrows():
+        st.dataframe(selected_records_df)
+        
+        # Display delete buttons for each record
+        for index, _ in enumerate(selected_records_df):
             delete_button = st.button(f"Delete Record {index + 1}", key=f"delete-{index}")
             if delete_button:
                 remove_record(index)
