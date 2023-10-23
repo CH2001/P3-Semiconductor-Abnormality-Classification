@@ -167,7 +167,7 @@ if option=='Visualization':
 
 
 else: 
-    st.write("<h4>Make your predictions here</h4>", unsafe_allow_html=True)
+    st.write("<h5>Make your predictions here</h5>", unsafe_allow_html=True)
 
     # Load the model
     try:
@@ -292,7 +292,7 @@ else:
         time.sleep(1)
         st.empty() 
 
-    st.write("<h4>Selected Records</h4>", unsafe_allow_html=True)
+    st.write("<h5>Selected Records</h5>", unsafe_allow_html=True)
     if st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
         st.dataframe(selected_records_df)
