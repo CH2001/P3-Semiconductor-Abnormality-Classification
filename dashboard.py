@@ -301,13 +301,21 @@ else:
     # Add a button to download the dataset as a CSV
     if st.button('Download CSV') and st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
+        csv = selected_records_df.to_csv(index=False)
+        b64 = base64.b64encode(csv.encode()).decode()
+        href = f'<a href="data:file/csv;base64,{b64}" download="selected_records.csv">Click here to download</a>'
+        st.markdown(href, unsafe_allow_html=True)
+
+        # selected_records_df = pd.DataFrame(st.session_state.selected_records)
         # st.download_button(
         #     "Download CSV",
         #     selected_records_df.to_csv(index=False),
         #     key="download-csv"
         # )
-        st.markdown(f'<a href="data:file/csv;base64,{selected_records_df.to_csv(index=False).encode().decode()}" download="selected_records.csv">Click here to download</a>', unsafe_allow_html=True)
-        download_clicked = True
+
+        # alt
+        # st.markdown(f'<a href="data:file/csv;base64,{selected_records_df.to_csv(index=False).encode().decode()}" download="selected_records.csv">Click here to download</a>', unsafe_allow_html=True)
+        # download_clicked = True
 
 
     # st.text(" ")
