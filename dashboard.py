@@ -292,14 +292,12 @@ else:
         st.write(f"Predicted output is: {result}")
         st.write("Record added.")
 
-    # Display selected records
-    # st.write("<h4>Selected Records</h4>", unsafe_allow_html=True)
-    # if st.session_state.selected_records:
-    #     selected_records_df = pd.DataFrame(st.session_state.selected_records)
-    #     st.dataframe(selected_records_df)
-    # else:
-    #     st.write("No records added yet.")
-    st.title("Selected Records")
+    st.write("<h4>Selected Records</h4>", unsafe_allow_html=True)
+    if st.session_state.selected_records:
+        selected_records_df = pd.DataFrame(st.session_state.selected_records)
+        st.dataframe(selected_records_df)
+    else:
+        st.write("No records added yet.")
 
     if st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
