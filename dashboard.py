@@ -297,13 +297,17 @@ else:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
         st.dataframe(selected_records_df)
 
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
         with col1:
             delete_index = st.selectbox("Delete record no.", range(1, len(selected_records_df) + 1))
         with col2:
             st.markdown("<br>", unsafe_allow_html=True)
             if st.button("Delete"):
                 remove_record(delete_index - 1)
+        with col3: 
+            st.markdown("<br>", unsafe_allow_html=True)
+            if st.button('Reset Table', key="reset-button"): 
+                st.session_state.selected_records = []
         # delete_index = st.selectbox("Record No:", range(1, len(selected_records_df) + 1))
 
         # if st.button("Delete"):
@@ -315,7 +319,6 @@ else:
     if st.session_state.selected_records:
         if st.button('Reset Table', key="reset-button"): 
             st.session_state.selected_records = []
-            st.success("Table reset. No records.")
 
         if st.button('Download CSV', key="download-button"):
             selected_records_df = pd.DataFrame(st.session_state.selected_records)
