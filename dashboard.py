@@ -295,6 +295,7 @@ else:
     st.write("<h5>Selected Records</h5>", unsafe_allow_html=True)
     if st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
+        selected_records_df.index = selected_records_df.index + 1
         st.dataframe(selected_records_df)
 
         col1, col2, col3 = st.columns([6, 1.5, 2.5])
