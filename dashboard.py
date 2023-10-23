@@ -194,6 +194,10 @@ else:
         record = {**input_data, "Prediction": result}
         st.session_state.selected_records.append(record)
         return result
+    
+    def remove_record(index):
+        if index < len(st.session_state.selected_records):
+            del st.session_state.selected_records[index]
 
     # Input data
     input_data = {}
@@ -289,12 +293,29 @@ else:
         st.write("Record added.")
 
     # Display selected records
-    st.write("<h4>Selected Records</h4>", unsafe_allow_html=True)
+    # st.write("<h4>Selected Records</h4>", unsafe_allow_html=True)
+    # if st.session_state.selected_records:
+    #     selected_records_df = pd.DataFrame(st.session_state.selected_records)
+    #     st.dataframe(selected_records_df)
+    # else:
+    #     st.write("No records added yet.")
+    st.title("Selected Records")
     if st.session_state.selected_records:
         selected_records_df = pd.DataFrame(st.session_state.selected_records)
+        for index, record in selected_records_df.iterrows():
+            delete_button = st.button(f"Delete Record {index + 1}", key=f"delete-{index}")
+            if delete_button:
+                remove_record(index)
         st.dataframe(selected_records_df)
     else:
         st.write("No records added yet.")
+
+        
+
+    # Add a button to reset the table
+    if st.button('Reset Table'):
+        st.session_state.selected_records = []
+        st.success("Table reset. No records.")
 
     # Add a button to download the dataset as a CSV
     if st.button('Download CSV') and st.session_state.selected_records:
@@ -303,30 +324,3 @@ else:
         b64 = base64.b64encode(csv.encode()).decode()
         href = f'<a href="data:file/csv;base64,{b64}" download="selected_records.csv">Click here to download</a>'
         st.markdown(href, unsafe_allow_html=True)
-
-        # selected_records_df = pd.DataFrame(st.session_state.selected_records)
-        # st.download_button(
-        #     "Download CSV",
-        #     selected_records_df.to_csv(index=False),
-        #     key="download-csv"
-        # )
-
-        # alt
-        # st.markdown(f'<a href="data:file/csv;base64,{selected_records_df.to_csv(index=False).encode().decode()}" download="selected_records.csv">Click here to download</a>', unsafe_allow_html=True)
-        # download_clicked = True
-
-
-    # st.text(" ")
-    # if st.button('Predict'):
-    #     # Predict output 
-    #     prediction = rf_model.predict(input_data_df)[0]
-
-    #     if prediction == 0: 
-    #         result = "abnormal"
-    #     else: 
-    #         result = "normal"
-
-    #     with st.spinner('Sending input features to model...'):
-    #         time.sleep(2)
-
-    #     st.write(f"This set of sensor data is: {result}")
