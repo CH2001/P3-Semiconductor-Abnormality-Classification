@@ -303,10 +303,12 @@ else:
             st.markdown("<br>", unsafe_allow_html=True)
             if st.button("Delete"):
                 remove_record(delete_index - 1)
+                st.experimental_rerun() 
         with col3: 
             st.markdown("<br>", unsafe_allow_html=True)
             if st.button('Reset Table', key="reset-button"): 
                 st.session_state.selected_records = []
+                st.experimental_rerun() 
     else:
         st.write("No records added yet.")
 
