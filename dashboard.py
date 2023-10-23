@@ -317,8 +317,8 @@ else:
 
 
     if st.session_state.selected_records:
-        if st.button('Reset Table', key="reset-button"): 
-            st.session_state.selected_records = []
+        # if st.button('Reset Table', key="reset-button"): 
+        #     st.session_state.selected_records = []
 
         if st.button('Download CSV', key="download-button"):
             selected_records_df = pd.DataFrame(st.session_state.selected_records)
