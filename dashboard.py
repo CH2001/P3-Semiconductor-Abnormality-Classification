@@ -97,6 +97,7 @@ if option=='Visualization':
 
     st.text(" ")
     st.text('Feature correlation visualization')
+    st.text('Understand about correlation between different features')
 
     # Plot graph 
     ind_value_corr = [i for i in feature_correlations_array[index_value][1:]]
