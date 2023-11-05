@@ -22,7 +22,7 @@ conda activate <environment-name>
 2. Run dashboard. 
 
 ## Sample results/ output
-![](https://github.com/CH2001/Employee-churn-classification/blob/main/Image/Demo.gif)
+![](https://github.com/CH2001/Semiconductor-Abnormality-Classification/blob/main/demo/demo.gif)
 
 ## Links 
 Dataset: [Semiconductor abnormally dataset dataset](https://www.timeseriesclassification.com/description.php?Dataset=Wafer) <br> 
