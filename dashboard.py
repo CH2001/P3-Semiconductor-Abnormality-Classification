@@ -81,7 +81,7 @@ if option=='Visualization':
         xaxis=dict(categoryorder='array', categoryarray=attribute_names)
     )
 
-    fig1.show()
+    # fig1.show()
 
     st.plotly_chart(fig1, use_container_width=True)
 
@@ -158,7 +158,7 @@ if option=='Visualization':
         height=1500
     )
 
-    fig2.show()
+    # fig2.show()
     st.plotly_chart(fig2, use_container_width=True)
 
     with st.expander("See correlated variables in text"):
